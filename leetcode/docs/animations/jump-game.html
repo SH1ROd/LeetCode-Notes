@@ -1,0 +1,80 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .grid-text { font-family: monospace; font-size: 18px; text-anchor: middle; dominant-baseline: middle; }
+    .label { font-family: sans-serif; font-size: 16px; font-weight: bold; fill: #555; }
+    .desc { font-family: sans-serif; font-size: 14px; fill: #666; }
+    .box { fill: none; stroke: #ccc; stroke-width: 2; }
+    
+    /* 动画控制区 */
+    @keyframes slideWindow {
+      0%, 25% { transform: translateX(0px); width: 120px; }      /* i=3, 窗口[0,1] */
+      35%, 75% { transform: translateX(60px); width: 120px; }    /* i=4, 窗口[1,2] */
+      85%, 100% { transform: translateX(120px); width: 120px; }  /* i=5, 窗口[2,3] */
+    }
+    @keyframes moveTarget {
+      0%, 25% { transform: translateX(0px); }     /* i=3 */
+      35%, 75% { transform: translateX(60px); }   /* i=4 */
+      85%, 100% { transform: translateX(120px); } /* i=5 */
+    }
+    @keyframes textFade3 { 0%, 25% { opacity: 1; } 26%, 100% { opacity: 0; } }
+    @keyframes textFade4 { 0%, 25% { opacity: 0; } 35%, 75% { opacity: 1; } 76%, 100% { opacity: 0; } }
+    @keyframes textFade5 { 0%, 75% { opacity: 0; } 85%, 100% { opacity: 1; } }
+
+    .window-rect {
+      fill: rgba(0, 120, 215, 0.2);
+      stroke: #0078d7; stroke-width: 3; stroke-dasharray: 6 4;
+      animation: slideWindow 9s infinite;
+    }
+    .pointer-i { animation: moveTarget 9s infinite; }
+    .t3 { animation: textFade3 9s infinite; }
+    .t4 { animation: textFade4 9s infinite; }
+    .t5 { animation: textFade5 9s infinite; }
+  </style>
+
+  <text x="50" y="80" class="label">Index:</text>
+  <text x="50" y="130" class="label">s:</text>
+  <text x="50" y="180" class="label">dp:</text>
+  
+  <g transform="translate(150, 0)">
+    <text x="30" y="80" class="grid-text">0</text>
+    <text x="90" y="80" class="grid-text">1</text>
+    <text x="150" y="80" class="grid-text">2</text>
+    <text x="210" y="80" class="grid-text">3</text>
+    <text x="270" y="80" class="grid-text">4</text>
+    <text x="330" y="80" class="grid-text">5</text>
+
+    <text x="30" y="130" class="grid-text">0</text>
+    <text x="90" y="130" class="grid-text">1</text>
+    <text x="150" y="130" class="grid-text">1</text>
+    <text x="210" y="130" class="grid-text">0</text>
+    <text x="270" y="130" class="grid-text">1</text>
+    <text x="330" y="130" class="grid-text">0</text>
+
+    <rect x="0" y="150" width="60" height="60" class="box" fill="#e2efda" />
+    <text x="30" y="180" class="grid-text" fill="green">T</text>
+    <rect x="60" y="150" width="60" height="60" class="box" />
+    <text x="90" y="180" class="grid-text">F</text>
+    <rect x="120" y="150" width="60" height="60" class="box" />
+    <text x="150" y="180" class="grid-text">F</text>
+    <rect x="180" y="150" width="60" height="60" class="box" fill="#e2efda" />
+    <text x="210" y="180" class="grid-text" fill="green">T</text>
+    <rect x="240" y="150" width="60" height="60" class="box" />
+    <text x="270" y="180" class="grid-text">F</text>
+    <rect x="300" y="150" width="60" height="60" class="box" />
+    <text x="330" y="180" class="grid-text">?</text>
+
+    <rect x="0" y="145" height="70" class="window-rect" rx="5" />
+    <text x="0" y="240" class="desc" fill="#0078d7">↑ 维护区间内 True 的数量 (ans_cnt)</text>
+    
+    <g class="pointer-i">
+      <polygon points="210,240 200,260 220,260" fill="#d70000" />
+      <text x="210" y="280" class="label" fill="#d70000">当前点 i</text>
+    </g>
+
+    <g transform="translate(0, 320)">
+      <text class="t3 desc">i=3: 来源窗口是 [0, 1]. ans_cnt包含了 dp[0], dp[1]</text>
+      <text class="t4 desc">i=4: 窗口右移！新元素(i-minJump)=2 进窗, 旧元素(i-maxJump-1)=0 出窗。</text>
+      <text class="t5 desc">i=5: 窗口继续右移！元素 3 进窗, 元素 1 出窗。</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+# IDE
+*.iml
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Obsidian (keep config, ignore machine-specific state)
+.obsidian/workspace.json
+.obsidian/graph.json
+.obsidian/plugins/*/main.js

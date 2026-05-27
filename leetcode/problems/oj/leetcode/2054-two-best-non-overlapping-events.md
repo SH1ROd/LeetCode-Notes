@@ -1,0 +1,84 @@
+#动态规划 #区间调度  [2054. 两个最好的不重叠活动 - 力扣（LeetCode）](https://leetcode.cn/problems/two-best-non-overlapping-events/description/)
+
+```c++
+class Solution {
+public:
+    int maxTwoEvents(vector<vector<int>>& events) {
+        sort(events.begin(), events.end(), [](const vector<int>& a, const vector<int>& b){
+            return a[1] < b[1];
+        });
+        int n = events.size();
+        vector<int> ends(n+1);
+        for (int i=1;i<=n;i++){
+            ends[i] = events[i-1][1];
+        }
+        vector<int> pre(n+1);
+        for (int i=1;i<=n;i++){
+            pre[i] = lower_bound(ends.begin()+1, ends.begin()+1+i, events[i-1][0]) - ends.begin() - 1;
+        }
+        vector<vector<int>> dp(n+1, vector<int>(3));
+        for (int i=1;i<=n;i++){
+            for(int j=1;j<=2;j++){
+            dp[i][j] = max(dp[i-1][j], dp[pre[i]][j-1] + events[i-1][2]);
+            }
+        }
+        return dp[n][2];
+    }
+};
+```
+
+>Python通过版
+```python
+class Solution:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        n = len(events)
+        events.sort(key = lambda x:x[1])
+        ends = [0] + [x[1] for x in events]
+        pre = [0] * (n + 1)
+        for i in range(1, n + 1):
+            pre[i] = bisect_left(ends, events[i - 1][0]) - 1
+        dp = [[0] * 3 for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            for j in range(1,3):
+                dp[i][j] = max(dp[i - 1][j], dp[pre[i]][j - 1] + events[i - 1][2])
+        return dp[n][2]
+```
+
+>下一版
+```python
+
+```
+
+> 1. **推导式须独立**：勿与元素混写，用加法拼接：`[0] + [x[1] for x in events]`。
+>     
+> 2. **空列表乘法无效**：`[] * n` 仍为空，初始化请用 `[0] * n`。
+>     
+> 3. **列表忌越界赋值**：列表不自动扩容。赋值前需预分配（`[0] * n`）或用 `append()`。
+>     
+> 4. **二维数组防浅拷贝**：严禁 `[[0]*m] * n`，必须用 `[[0]*m for _ in range(n)]`。
+>    
+> 5. **二分边界需精准**：明确开闭区间，找最后小于 `start` 的位置用 `bisect_left(ends, start) - 1`。
+
+ `bisect` 的四种边界查找逻辑整理：
+为你加入了专门的**记忆原理解析**列，将 `left` / `right` 的物理意义与 `-1` 的逻辑完全和示例 `a = [10, 20, 20, 30]`, `x = 20` 绑定在一起：
+
+|**查找目标**|**对应 Python 写法**|**边界判断**|**示例结果 (x=20)**|**结合示例的记忆方法与原理解析**|
+|---|---|---|---|---|
+|**`>= x`**<br><br>  <br><br>(首个)|`idx = bisect_left(a, x)`|`idx < len(a)`|返回 `1`<br><br>  <br><br>对应首个 **`20`**|**`left`=“挤到最左边”**：假设把20插进数组，最左边能插在索引1。这个位置恰好就是首个 `>=20` 的元素，**找“大于类”直接拿，不减1**。|
+|**`> x`**<br><br>  <br><br>(首个)|`idx = bisect_right(a, x)`|`idx < len(a)`|返回 `3`<br><br>  <br><br>对应 **`30`**|**`right`=“跨过所有相等值”**：假设把20插进数组，最右边要跨过所有20，插在索引3。这个位置恰好碰到了首个 `>20` 的元素，**直接拿，不减1**。|
+|**`<= x`**<br><br>  <br><br>(末个)|`idx = bisect_right(a, x) - 1`|`idx >= 0`|`3 - 1 = 2`<br><br>  <br><br>对应末个 **`20`**|**找 `<=` 先找 `>`再退一步**：想找最后一个 `<=20`（末个20），就先找它的“反面”（首个 `>20` 的30，也就是 `right`），然后向左退一步（`-1`）正好落回末个20上。|
+|**`< x`**<br><br>  <br><br>(末个)|`idx = bisect_left(a, x) - 1`|`idx >= 0`|`1 - 1 = 0`<br><br>  <br><br>对应 **`10`**|**找 `<` 先找 `>=`再退一步**：想找最后一个 `<20`（即10），就先找它的“反面”（首个 `>=20` 的首个20，也就是 `left`），然后向左退一步（`-1`）正好落在10上。|
+
+---
+
+### 🧠 终极抽象记忆心法（理解了就忘不掉）
+
+1. **底层逻辑**：`bisect` 本质上给的都是**“插入点”**。它只会找“大于等于”或“大于”，**它天生不会直接找“小于”**。
+    
+2. **正向找（找偏大的，`>=` 或 `>`）**：顺着 API 的天性，直接用 `left` 或 `right`，**绝对不 `-1`**。
+    
+3. **反向找（找偏小的，`<=` 或 `<`）**：因为 API 不支持直接找“小于”，只能先找到“大于/大于等于”的边界，然后**往左退一步（`-1`）**。
+    
+
+这样结合例子，无论是笔试还是面试，在白板上手推一下 `[10, 20, 20, 30]` 就能瞬间反应过来该用哪个了。
+
