@@ -170,13 +170,13 @@ leetcode/
 
 ## 📖 Usage Guide
 
-This project uses the `/p` skill to drive the problem-solving workflow. Invoke it directly in conversation:
+All skills trigger via natural language — no slash commands needed.
 
-```
-/p two-sum
-/p 209 用了滑动窗口但结果不对
-/p https://leetcode.cn/problems/3sum/
-```
+**Practice mode** — just say "practice" or "solve problem X":
+
+> practice two-sum
+> solve 209 用了滑动窗口但结果不对
+> https://leetcode.cn/problems/3sum/
 
 **Two modes, auto-selected:**
 
@@ -187,7 +187,7 @@ This project uses the `/p` skill to drive the problem-solving workflow. Invoke i
 
 Output: A note documenting the full thought evolution + a transferable personal methodology card.
 
-Other skills: `/ur` — rescan the codebase and update statistics and assessment.
+**Update stats** — say "update README" or "refresh progress" to rescan the codebase.
 
 ---
 
