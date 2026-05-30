@@ -170,12 +170,12 @@ leetcode/
 
 ## 📖 Usage Guide
 
-This project uses the `/practice` skill to drive the problem-solving workflow. Invoke it directly in conversation:
+This project uses the `/p` skill to drive the problem-solving workflow. Invoke it directly in conversation:
 
 ```
-/practice two-sum
-/practice 209 用了滑动窗口但结果不对
-/practice https://leetcode.cn/problems/3sum/
+/p two-sum
+/p 209 用了滑动窗口但结果不对
+/p https://leetcode.cn/problems/3sum/
 ```
 
 **Two modes, auto-selected:**
@@ -187,7 +187,7 @@ This project uses the `/practice` skill to drive the problem-solving workflow. I
 
 Output: A note documenting the full thought evolution + a transferable personal methodology card.
 
-Other skills: `/update-readme` — rescan the codebase and update statistics and assessment.
+Other skills: `/ur` — rescan the codebase and update statistics and assessment.
 
 ---
 

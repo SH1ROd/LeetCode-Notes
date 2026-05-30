@@ -170,12 +170,12 @@ leetcode/
 
 ## 📖 使用指南
 
-本項目通過 `/practice` skill 驅動刷題學習流程。在對話中直接調用：
+本項目通過 `/p` skill 驅動刷題學習流程。在對話中直接調用：
 
 ```
-/practice 兩數之和
-/practice 第209題 用了滑動視窗但結果不對
-/practice https://leetcode.cn/problems/3sum/
+/p 兩數之和
+/p 第209題 用了滑動視窗但結果不對
+/p https://leetcode.cn/problems/3sum/
 ```
 
 **兩種模式自動切換：**
@@ -187,7 +187,7 @@ leetcode/
 
 最終產出：一篇帶完整思考演進過程的筆記 + 可遷移的個人方法論卡片。
 
-其他 skill：`/update-readme` — 重新掃描全庫，更新統計數據和能力評估。
+其他 skill：`/ur` — 重新掃描全庫，更新統計數據和能力評估。
 
 ---
 
