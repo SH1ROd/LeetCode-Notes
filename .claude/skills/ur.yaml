@@ -1,4 +1,4 @@
-name: update-readme
+name: ur
 description: 重新扫描 LeetCode 笔记全库，更新 README 中的统计数据、能力评估和近期刷题记录
 model: opus
 ---
