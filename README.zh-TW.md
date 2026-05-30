@@ -168,6 +168,29 @@ leetcode/
 
 ---
 
+## 📖 使用指南
+
+本項目通過 `/practice` skill 驅動刷題學習流程。在對話中直接調用：
+
+```
+/practice 兩數之和
+/practice 第209題 用了滑動視窗但結果不對
+/practice https://leetcode.cn/problems/3sum/
+```
+
+**兩種模式自動切換：**
+
+| 你的狀態 | 模式 | 行為 |
+|---------|------|------|
+| 一次做對 | ✅ Quick | 自動格式化筆記 + 可選總結 |
+| 卡住/做錯 | 🔄 Deep | 診斷斷點 → 逐級 hint → 直到解出 → 個人遷移卡 |
+
+最終產出：一篇帶完整思考演進過程的筆記 + 可遷移的個人方法論卡片。
+
+其他 skill：`/update-readme` — 重新掃描全庫，更新統計數據和能力評估。
+
+---
+
 <p align="center">
   <a href="README.md">简体中文</a> ·
   <a href="README.en.md">English</a>

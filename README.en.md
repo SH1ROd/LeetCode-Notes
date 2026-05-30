@@ -168,6 +168,29 @@ leetcode/
 
 ---
 
+## 📖 Usage Guide
+
+This project uses the `/practice` skill to drive the problem-solving workflow. Invoke it directly in conversation:
+
+```
+/practice two-sum
+/practice 209 用了滑动窗口但结果不对
+/practice https://leetcode.cn/problems/3sum/
+```
+
+**Two modes, auto-selected:**
+
+| Your status | Mode | Behavior |
+|------------|------|----------|
+| Solved first try | ✅ Quick | Auto-format note + optional summary |
+| Stuck / wrong | 🔄 Deep | Diagnose → escalating hints → solve → personal migration card |
+
+Output: A note documenting the full thought evolution + a transferable personal methodology card.
+
+Other skills: `/update-readme` — rescan the codebase and update statistics and assessment.
+
+---
+
 <p align="center">
   <a href="README.md">简体中文</a> ·
   <a href="README.zh-TW.md">繁體中文</a>
